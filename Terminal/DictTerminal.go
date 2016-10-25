@@ -132,10 +132,10 @@ func test1(){
 	if x=="esc"{
 		goto RAUSS
 	}
-	CHECK:
+	SWITCH:
 	switch x {
 	default:
-		fmt.Println("------------------")
+		//fmt.Println("------------------")
 		goto NEXTE
 	/*case "ä","ü","ß","ö": // sobald des an Umlaut od. scharfes ß isch, gibts (IN DER EXE!!) a Dauerschleife
 		x=""*/
@@ -152,7 +152,7 @@ func test1(){
 			fmt.Printf("%v = %v\n",dict.Dictionaries[nRandomDict].Vocables[nRandomVoc].Languages[nRandomLang],dict.Dictionaries[nRandomDict].Vocables[nRandomVoc].Languages[1])
 		}
 		//goto NOMOL
-		fmt.Printf("------------------\n\n")
+		fmt.Printf("------------------\n")
 		goto NEXTE
 	/*case "XX-":
 		fmt.Printf("%v \n__________________\n\n",dict.Dictionaries[nRandomDict].Vocables[nRandomVoc].Languages[0] + " = " + dict.Dictionaries[nRandomDict].Vocables[nRandomVoc].Languages[1])
@@ -163,13 +163,14 @@ func test1(){
 		fmt.Printf("RandomDict: %v    RandomVoc: %v     RandomLang: %v\n",dict.Dictionaries[nRandomDict].Name, nRandomVoc, nRandomLang)
 		goto NOMOL
 	case "!s": //Suche Vocable
-		//fmt.Println("---------------------")
+		fmt.Println("=====================SUCHE START")
 		SUCHAGAIN:
 		fmt.Printf("%v","!s >")
 		x=""
 		fmt.Scan(&x)
 		if strings.HasPrefix(x,"!"){
-			goto CHECK
+			fmt.Println("=====================SUCHE ENDE")
+			goto SWITCH
 		}
 		s,anz:=such(x)
 		if anz==0{
@@ -177,7 +178,6 @@ func test1(){
 		}else {
 			fmt.Printf("%v\n", s)
 		}
-		//fmt.Println("=====================")
 		goto SUCHAGAIN
 	case "esc","!q","!Q":
 		goto RAUSS
@@ -198,39 +198,46 @@ func test1(){
 
 }
 func such(s string)(gef string, anz int){
+	//fmt.Println("--------------Search Start")
 	s= strings.ToLower(s)
+	var lvoc string
 	var lvocRet string
 	//for i,r:=range AllDictFiles{
 	var d dict.Dictionary
 	nfund:=0
-
+	nfundGesamt:=0
 	ii:=0
+	//i:=0
 	for _ ,d = range dict.Dictionaries{
 		//fmt.Printf("DICTIONARY: %v %v:\n",i,d.Name)
 		nfund=0
+		lvoc=""
 		for ii, _ = range d.Vocables {
+			//fmt.Printf("  ii:%v\n",ii)
 			if strings.Contains(strings.ToLower(d.Vocables[ii].Languages[0]),s)||strings.Contains(strings.ToLower(d.Vocables[ii].Languages[1]),s){
 				nfund++
-				if lvocRet=="" {
-					lvocRet = "    " + d.Vocables[ii].Languages[0] + " = " + d.Vocables[ii].Languages[1]
+				nfundGesamt++
+				if lvoc =="" {
+					//fmt.Printf("    Fund: %v\n", d.Vocables[ii])
+					lvoc = "    " + d.Vocables[ii].Languages[0] + " = " + d.Vocables[ii].Languages[1]
 				}else{
-					lvocRet = lvocRet + "\n" + "    " + d.Vocables[ii].Languages[0] + " = " + d.Vocables[ii].Languages[1]
+					lvoc = lvoc + "\n" + "    " + d.Vocables[ii].Languages[0] + " = " + d.Vocables[ii].Languages[1]
 				}
 			}
 		}
 		if nfund > 0 {
 			if lvocRet == "" {
-				//lvocRet = strings.ToUpper(d.Name) + " (" + fmt.Printf("%v",nfund) + " Einträge)"
-				lvocRet = fmt.Sprintf("%v (%v Einträge)", strings.ToUpper(d.Name) ,nfund)
-				//lvocRet =  fmt.Sprintf("%v %v", "aaa" ,"bbb")
+				//lvocRet = fmt.Sprintf("%v (%v Einträge)", strings.ToUpper(d.Name) ,nfund)
+				lvocRet = fmt.Sprintf("%v (%v)\n%v",strings.ToUpper(d.Name), nfund, lvoc)
 			} else {
-				lvocRet =  fmt.Sprintf("\n\n%v (%v Einträge) \n%v", strings.ToUpper(d.Name), nfund ,  lvocRet)
+				lvoc =  fmt.Sprintf("\n\n%v (%v) \n%v", strings.ToUpper(d.Name), nfund , lvoc)
+				lvocRet = lvocRet + lvoc
 			}
 		}
-		fmt.Println("==============================")
 	}
+	//fmt.Println("--------------Search END")
 //RAUSS:
-	return  lvocRet, nfund
+	return lvocRet, nfundGesamt
 }
 func Susi(i int)int{
 	return  i+777
