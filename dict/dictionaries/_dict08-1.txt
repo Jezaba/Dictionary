@@ -1,0 +1,25 @@
+diligence=    Fleiß, Gewissenhaftigkeit
+dir=                fatal
+arbitrarily = willkürlich
+abbreviated = gekürzt
+deliberately = absichtlich, bewußt, vorsätzlich
+apostate=abtrünnig(er)
+calamity=Unheil, Katastrope
+encounter=Begegnung, Treffen
+defy=trotzen
+disguise=tarnen, Verkleidung
+distort=verzerren
+gingerly=behutsam
+indulgence=Nachgiebigkeit
+pathetic=erbärmlich
+prudence=Vorsicht
+realm=Bereich
+renegade=abtrünnig(er)
+wage=Lohn
+in vain=vergebens
+villain=Bösewicht
+
+
+
+
+

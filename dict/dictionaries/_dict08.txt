@@ -1,0 +1,38 @@
+cleave=         spalten, klieben
+diligence=    Fleiß, Gewissenhaftigkeit
+dir=                fatal
+fornication= Unzucht
+obliterate    = auslöschen, verwischen
+arbitrarily = willkürlich
+abbreviated = gekürzt
+concurrency = Nebenläufigkeit
+deliberately = absichtlich, bewußt, vorsätzlich
+abomination=Greuel
+apostate=abtrünnig(er)
+calamity=Unheil, Katastrope
+clash=zusammenstossen
+counterfeit=fälschen, Fälschung
+encounter=Begegnung, Treffen
+defy=trotzen
+disguise=tarnen, Verkleidung
+disparage=verunglimpfen
+distort=verzerren
+gingerly=behutsam
+grief, mourn=trauer
+innate=angeboren
+indulgence=Nachgiebigkeit
+oblivion=Vergessenheit
+pathetic=erbärmlich
+prudence=Vorsicht
+realm=Bereich
+rebuke=tadeln
+renegade=abtrünnig(er)
+wage=Lohn
+in vain=vergebens
+vigilant=aufmerksam
+villain=Bösewicht
+
+
+
+
+
