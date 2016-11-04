@@ -159,10 +159,10 @@ func test1(){
 		goto NEXTE
 	*/
 	case ",":
-	case "d":
+	case ":d":
 		fmt.Printf("RandomDict: %v    RandomVoc: %v     RandomLang: %v\n",dict.Dictionaries[nRandomDict].Name, nRandomVoc, nRandomLang)
 		goto NOMOL
-	case "!s": //Suche Vocable
+	case ":s": //Suche Vocable
 		fmt.Println("=====================SUCHE START")
 		SUCHAGAIN:
 		fmt.Printf("%v","!s >")
