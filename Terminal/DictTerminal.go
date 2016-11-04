@@ -179,7 +179,7 @@ func test1(){
 			fmt.Printf("%v\n", s)
 		}
 		goto SUCHAGAIN
-	case "esc","!q","!Q":
+	case "esc",":q",":Q":
 		goto RAUSS
 	}
 	/*if x==" "{
