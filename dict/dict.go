@@ -196,55 +196,13 @@ func SortDictionariesByVocables(){
 
 func FindVocable(){}
 func AddVocable(){}
-func EditVocable(){
-
+func EditVocable(ndict ,nvocable , nlanguage int, strnew string){
+	Dictionaries[ndict].Vocables[nvocable].Languages[nlanguage] = strnew
 }
 func DeleteVocable(){}
 
 
-func SearchStringInDicts(s string)(retourString string, anz int){
-	//fmt.Println("--------------Search Start")
-	s= strings.ToLower(s)
-	var lvoc string
-	var lRetStr string
-	//for i,r:=range AllDictFiles{
-	var d Dictionary
-	nfund:=0
-	nfundGesamt:=0
-	ii:=0
-	//i:=0
-	for _ ,d = range Dictionaries{
-		//fmt.Printf("DICTIONARY: %v %v:\n",i,d.Name)
-		nfund=0
-		lvoc=""
-		for ii, _ = range d.Vocables {
-			//fmt.Printf("  ii:%v\n",ii)
-			if strings.Contains(strings.ToLower(d.Vocables[ii].Languages[0]),s)||strings.Contains(strings.ToLower(d.Vocables[ii].Languages[1]),s){
-				nfund++
-				nfundGesamt++
-				if lvoc =="" {
-					//fmt.Printf("    Fund: %v\n", d.Vocables[ii])
-					lvoc = "    " + d.Vocables[ii].Languages[0] + " = " + d.Vocables[ii].Languages[1]
-				}else{
-					lvoc = lvoc + "\n" + "    " + d.Vocables[ii].Languages[0] + " = " + d.Vocables[ii].Languages[1]
-				}
-			}
-		}
-		if nfund > 0 {
-			if lRetStr == "" {
-				//lvocRet = fmt.Sprintf("%v (%v Einträge)", strings.ToUpper(d.Name) ,nfund)
-				lRetStr = fmt.Sprintf("%v (%v)\n%v",strings.ToUpper(d.Name), nfund, lvoc)
-			} else {
-				lvoc =  fmt.Sprintf("\n\n%v (%v) \n%v", strings.ToUpper(d.Name), nfund , lvoc)
-				lRetStr = lRetStr + lvoc
-			}
-		}
-	}
-	//fmt.Println("--------------Search END")
-	//RAUSS:
-	return lRetStr, nfundGesamt
-}
-func SearchStringInDicts2(s string)(dictGefunden []Dictionary){
+func SearchStringInDicts(s string)(dictGefunden []Dictionary){
 	//fmt.Println("--------------Search Start")
 	s= strings.ToLower(s)
 	//var lvoc string

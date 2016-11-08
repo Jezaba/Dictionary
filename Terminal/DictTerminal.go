@@ -97,7 +97,7 @@ for _,f:=range s{
 	test3()
 	fmt.Println(">>>>>>>>>>>>>TEST 3 ENDE")
 
-	os.Exit(1)
+	//os.Exit(1)
 	test1()
 	/*if test2()=="test1" {
 		test1()
@@ -168,6 +168,9 @@ func test1(){
 	case ":d":
 		fmt.Printf("RandomDict: %v    RandomVoc: %v     RandomLang: %v\n",dict.Dictionaries[nRandomDict].Name, nRandomVoc, nRandomLang)
 		goto NOMOL
+	case ":e": //EDIT
+		editVocable()
+		goto NOMOL
 	case ":s": //Suche Vocable
 		fmt.Println("=====================SUCHE START")
 		SUCHAGAIN:
@@ -209,7 +212,7 @@ func test3(){
 	var x string
 	x=""
 	fmt.Scan(&x)
-	D:= dict.SearchStringInDicts2(x)
+	D:= dict.SearchStringInDicts(x)
 	fmt.Printf("DICTS 0: %v\n\n\n\n ",D[0])
 	fmt.Printf("DICTS 1: %v\n\n\n\n ",D[1])
 	fmt.Printf(" %v mal in allen Dicts gefunden\n ",len(D))
@@ -268,6 +271,16 @@ func such(s string)(gef string, anz int){
 	//fmt.Println("--------------Search END")
 //RAUSS:
 	return lvocRet, nfundGesamt
+}
+func editVocable(){
+	fmt.Println("BeginEdit")
+	var x string
+	x=""
+	old:=dict.Dictionaries[0].Vocables[0]
+	fmt.Printf("EditVocable(dict[0].voc[0].lang[1]%v\n>",dict.Dictionaries[0].Vocables[0].Languages[1])
+	fmt.Scan(&x)
+	dict.EditVocable(0,0,1,x)
+	fmt.Printf("aus Old '%v' wurde '%v'\nEndEdit\n",old,dict.Dictionaries[0].Vocables[0].Languages[1])
 }
 func Susi(i int)int{
 	return  i+777
