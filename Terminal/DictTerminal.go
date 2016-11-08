@@ -93,9 +93,9 @@ for _,f:=range s{
 			fmt.Println(i+1, ii+1, counter, rr.String(" = "))
 		}*/
 	}
-	fmt.Println("             TEST 3")
+	fmt.Println("TEST 3 <<<<<<<<<<<<<<<")
 	test3()
-	fmt.Println("             TEST 3 ENDE")
+	fmt.Println(">>>>>>>>>>>>>TEST 3 ENDE")
 
 	os.Exit(1)
 	test1()
@@ -205,9 +205,26 @@ func test1(){
 }
 
 func test3(){
-	//var x  dict.Dictionaries
- 	 a,b,x:= dict.SearchStringInDicts2("abb")
-	fmt.Printf("  %v\n  %v\n  %v\n",a,b,x)
+	fmt.Print("test3 (such string eingeben:)>")
+	var x string
+	x=""
+	fmt.Scan(&x)
+	D:= dict.SearchStringInDicts2(x)
+	fmt.Printf("DICTS 0: %v\n\n\n\n ",D[0])
+	fmt.Printf("DICTS 1: %v\n\n\n\n ",D[1])
+	fmt.Printf(" %v mal in allen Dicts gefunden\n ",len(D))
+	if len(D)>0{
+		//fmt.Printf("Länge %v\n", D[0])
+		for i:=0;i<len(D);i++{
+			fmt.Printf("  Dictname: %v  AnzahlVocs(%v)\n",D[i].Name,len(D[i].Vocables))
+			for ii:=0 ;ii<len(D[i].Vocables);ii++{
+				//fmt.Printf("      Anzahl Vocs: %v\n" ,len(D[i].Vocables))
+				fmt.Printf("      Dict[%v].Vocables[%v] %v = %v  \n" ,i,ii,D[i].Vocables[ii].Languages[0],D[i].Vocables[ii].Languages[1])
+			}
+		}
+
+	}
+
 }
 
 func such(s string)(gef string, anz int){

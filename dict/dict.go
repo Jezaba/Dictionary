@@ -244,11 +244,11 @@ func SearchStringInDicts(s string)(retourString string, anz int){
 	//RAUSS:
 	return lRetStr, nfundGesamt
 }
-func SearchStringInDicts2(s string)(retourString string, anzGef int, dictGefunden []Dictionary){
+func SearchStringInDicts2(s string)(dictGefunden []Dictionary){
 	//fmt.Println("--------------Search Start")
 	s= strings.ToLower(s)
-	var lvoc string
-	var lRetStr string
+	//var lvoc string
+	//var lRetStr string
 
 	var dNew Dictionary
 	var dictsGef []Dictionary
@@ -260,7 +260,8 @@ func SearchStringInDicts2(s string)(retourString string, anzGef int, dictGefunde
 	for _ ,d = range Dictionaries{
 		//fmt.Printf("DICTIONARY: %v %v:\n",i,d.Name)
 		nfund=0
-		lvoc=""
+		//dNew=nil
+		vocables = vocables[:0]
 		for ii, _ = range d.Vocables {
 			//fmt.Printf("  ii:%v\n",ii)
 			if strings.Contains(strings.ToLower(d.Vocables[ii].Languages[0]),s)||strings.Contains(strings.ToLower(d.Vocables[ii].Languages[1]),s){
@@ -270,22 +271,24 @@ func SearchStringInDicts2(s string)(retourString string, anzGef int, dictGefunde
 			}
 		}
 		if nfund > 0 {
-			if lRetStr == "" {
-				lRetStr = fmt.Sprintf("%v (%v)\n%v",strings.ToUpper(d.Name), nfund, lvoc)
+			//if lRetStr == "" {
+			//	lRetStr = fmt.Sprintf("%v (%v)\n%v",strings.ToUpper(d.Name), nfund, lvoc)
 				dNew =  Dictionary{}
 				dNew.LanguageSeparator = d.LanguageSeparator
 				dNew.NumberOfLanguages = d.NumberOfLanguages
 				dNew.WordSeparator = d.WordSeparator
 				dNew.Name= d.Name
 				dNew.Vocables=vocables
+				//fmt.Printf("		DOO dNew.Name = %v\n", dNew.Name)
+				//fmt.Printf("		dNew.Vocables = %v\n", dNew.Vocables)
 				dictsGef = append(dictsGef,dNew)
-			} else {
-				lvoc =  fmt.Sprintf("\n\n%v (%v) \n%v", strings.ToUpper(d.Name), nfund , lvoc)
-				lRetStr = lRetStr + lvoc
-			}
+			//} else {
+			//	lvoc =  fmt.Sprintf("\n\n%v (%v) \n%v", strings.ToUpper(d.Name), nfund , lvoc)
+			//	lRetStr = lRetStr + lvoc
+			//}
 		}
 	}
-	return lRetStr, nfundGesamt, dictsGef
+	return  dictsGef
 }
 var Seppl string
 var VocableDevider string
