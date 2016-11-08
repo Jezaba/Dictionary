@@ -2,13 +2,16 @@ package main
 import (
 	"fmt"
 	"Dictionary/dict"
-	xx "Dictionary/dict/trainer"
+	xx "Dictionary/trainer"
 	_ "path/filepath"
 	"os"
 	"sort"
 	"strings"
+
 )
 var AllDictFiles []string
+//var AllDictionaries []dict.Dictionary
+
 func main() {
 	//var AlleDictionaryFiles []string
 	CurDir, _ := os.Getwd() //filepath.Abs(filepath.Dir(os.Args[0]))
@@ -90,8 +93,11 @@ for _,f:=range s{
 			fmt.Println(i+1, ii+1, counter, rr.String(" = "))
 		}*/
 	}
+	fmt.Println("             TEST 3")
+	test3()
+	fmt.Println("             TEST 3 ENDE")
 
-
+	os.Exit(1)
 	test1()
 	/*if test2()=="test1" {
 		test1()
@@ -165,7 +171,7 @@ func test1(){
 	case ":s": //Suche Vocable
 		fmt.Println("=====================SUCHE START")
 		SUCHAGAIN:
-		fmt.Printf("%v","!s >")
+		fmt.Printf("%v",":s >")
 		x=""
 		fmt.Scan(&x)
 		if strings.HasPrefix(x,"!"){
@@ -197,6 +203,13 @@ func test1(){
 	RAUSS:
 
 }
+
+func test3(){
+	//var x  dict.Dictionaries
+ 	 a,b,x:= dict.SearchStringInDicts2("abb")
+	fmt.Printf("  %v\n  %v\n  %v\n",a,b,x)
+}
+
 func such(s string)(gef string, anz int){
 	//fmt.Println("--------------Search Start")
 	s= strings.ToLower(s)
