@@ -272,7 +272,7 @@ func SearchStringInDicts2(s string)(retourString string, anzGef int, dictGefunde
 		if nfund > 0 {
 			if lRetStr == "" {
 				lRetStr = fmt.Sprintf("%v (%v)\n%v",strings.ToUpper(d.Name), nfund, lvoc)
-				dNew =  Dictionary{Name:d.Name}
+				dNew =  Dictionary{}
 				dNew.LanguageSeparator = d.LanguageSeparator
 				dNew.NumberOfLanguages = d.NumberOfLanguages
 				dNew.WordSeparator = d.WordSeparator
