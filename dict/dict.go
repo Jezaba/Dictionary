@@ -215,37 +215,42 @@ func SearchStringInDicts(s string)(dictGefunden []Dictionary){
 	nfundGesamt:=0
 	ii:=0
 	var d Dictionary
+	//i:=0
 	for _ ,d = range Dictionaries{
-		//fmt.Printf("DICTIONARY: %v %v:\n",i,d.Name)
+		//fmt.Printf("Do0 DICTIONARY: %v %v:\n",d.Name)
 		nfund=0
 		//dNew=nil
 		vocables = vocables[:0]
 		for ii, _ = range d.Vocables {
 			//fmt.Printf("  ii:%v\n",ii)
 			if strings.Contains(strings.ToLower(d.Vocables[ii].Languages[0]),s)||strings.Contains(strings.ToLower(d.Vocables[ii].Languages[1]),s){
+
 				nfund++
+		//		fmt.Printf("  Do1 Gefunden in: %v:  (nfund: %v)   %v = %v\n",d.Name, nfund,d.Vocables[ii].Languages[0],d.Vocables[ii].Languages[1])
 				nfundGesamt++
 				vocables=append(vocables,d.Vocables[ii])
 			}
 		}
 		if nfund > 0 {
+
 			//if lRetStr == "" {
 			//	lRetStr = fmt.Sprintf("%v (%v)\n%v",strings.ToUpper(d.Name), nfund, lvoc)
-				dNew =  Dictionary{}
-				dNew.LanguageSeparator = d.LanguageSeparator
-				dNew.NumberOfLanguages = d.NumberOfLanguages
-				dNew.WordSeparator = d.WordSeparator
-				dNew.Name= d.Name
-				dNew.Vocables=vocables
-				//fmt.Printf("		DOO dNew.Name = %v\n", dNew.Name)
-				//fmt.Printf("		dNew.Vocables = %v\n", dNew.Vocables)
-				dictsGef = append(dictsGef,dNew)
+			dNew =  Dictionary{}
+			dNew.LanguageSeparator = d.LanguageSeparator
+			dNew.NumberOfLanguages = d.NumberOfLanguages
+			dNew.WordSeparator = d.WordSeparator
+			dNew.Name= d.Name
+			dNew.Vocables=vocables
+			//fmt.Printf("		DOO dNew.Name = %v\n", dNew.Name)
+			//fmt.Printf("		dNew.Vocables = %v\n", dNew.Vocables)
+			dictsGef = append(dictsGef,dNew)
 			//} else {
 			//	lvoc =  fmt.Sprintf("\n\n%v (%v) \n%v", strings.ToUpper(d.Name), nfund , lvoc)
 			//	lRetStr = lRetStr + lvoc
 			//}
 		}
 	}
+
 	return  dictsGef
 }
 var Seppl string

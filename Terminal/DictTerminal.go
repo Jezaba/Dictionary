@@ -183,6 +183,7 @@ func readString(consolesetext string,input *string)  {
 	}
 	// convert CRLF to LF
 	*input = strings.Replace(*input, "\r\n", "", -1)
+	*input = strings.Replace(*input, "\n", "", -1)
 }
 
 func such(searchstring *string){
