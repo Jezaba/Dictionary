@@ -7,7 +7,7 @@ import (
 	"os"
 	"sort"
 	"strings"
-
+	"bufio"
 )
 var AllDictFiles []string
 //var AllDictionaries []dict.Dictionary
@@ -93,11 +93,16 @@ for _,f:=range s{
 			fmt.Println(i+1, ii+1, counter, rr.String(" = "))
 		}*/
 	}
+
+	menu()
+	os.Exit(1)
+
+
 	fmt.Println("TEST 3 <<<<<<<<<<<<<<<")
-	test3()
+	//test3()
 	fmt.Println(">>>>>>>>>>>>>TEST 3 ENDE")
 
-	//os.Exit(1)
+
 	test1()
 	/*if test2()=="test1" {
 		test1()
@@ -206,6 +211,117 @@ func test1(){
 	RAUSS:
 
 }
+func training(){
+	var x string
+	NEXTE:
+	x=""
+
+	nRandomDict:=dict.GetRandomNumber(0,len(dict.Dictionaries))
+	nRandomVoc:=dict.GetRandomNumber(0,len(dict.Dictionaries[nRandomDict].Vocables))
+	nRandomLang:=dict.GetRandomNumber(0,2)
+	fmt.Printf("%v ",dict.Dictionaries[nRandomDict].Vocables[nRandomVoc].Languages[nRandomLang])
+	NOMOL:
+	x=""
+	readString ("",&x)
+	//fmt.Println("Len x:", len(x), x)
+	fmt.Printf("x=%v   len=%v\n", x,  len(x))
+
+	//x="esc"
+	if x=="esc"{
+		goto RAUSS
+	}
+	SWITCH:
+	switch x {
+	default:
+		//fmt.Println("------------------")
+		goto NEXTE
+	/*case "ä","ü","ß","ö": // sobald des an Umlaut od. scharfes ß isch, gibts (IN DER EXE!!) a Dauerschleife
+		x=""*/
+
+	//case ".":
+	case "-":
+		if nRandomLang==1 {
+			//nRandomLang=0
+			//fmt.Printf("                       %v",dict.Dictionaries[nRandomDict].Vocables[nRandomVoc].Languages[nRandomLang])
+			fmt.Printf("%v = %v\n",dict.Dictionaries[nRandomDict].Vocables[nRandomVoc].Languages[nRandomLang],dict.Dictionaries[nRandomDict].Vocables[nRandomVoc].Languages[0])
+		}else {
+			//nRandomLang=1
+			//fmt.Printf("                       %v",dict.Dictionaries[nRandomDict].Vocables[nRandomVoc].Languages[nRandomLang])
+			fmt.Printf("%v = %v\n",dict.Dictionaries[nRandomDict].Vocables[nRandomVoc].Languages[nRandomLang],dict.Dictionaries[nRandomDict].Vocables[nRandomVoc].Languages[1])
+		}
+		//goto NOMOL
+		fmt.Printf("------------------\n")
+		goto NEXTE
+	/*case "XX-":
+		fmt.Printf("%v \n__________________\n\n",dict.Dictionaries[nRandomDict].Vocables[nRandomVoc].Languages[0] + " = " + dict.Dictionaries[nRandomDict].Vocables[nRandomVoc].Languages[1])
+		goto NEXTE
+	*/
+	case ",":
+	case ":d":
+		fmt.Printf("RandomDict: %v    RandomVoc: %v     RandomLang: %v\n",dict.Dictionaries[nRandomDict].Name, nRandomVoc, nRandomLang)
+		goto NOMOL
+	case ":e": //EDIT
+		editVocable()
+		goto NOMOL
+	case ":s": //Suche Vocable
+		fmt.Println("=====================SUCHE START")
+		SUCHAGAIN:
+
+		x=""
+		readString (":s >",&x)
+		//fmt.Println("Len x:", len(x), x)
+		//fmt.Printf("x=%v   len=%v\n", x,  len(x))
+
+
+
+
+		//fmt.Printf("%v",":s >")
+		//x=""
+		//fmt.Scan(&x)
+		if strings.HasPrefix(x,"!"){
+			fmt.Println("=====================SUCHE ENDE")
+			goto SWITCH
+		}
+		s,anz:=such(x)
+		if anz==0{
+			fmt.Printf("%v\n", "not found")
+		}else {
+			fmt.Printf("%v\n", s)
+		}
+		goto SUCHAGAIN
+	case "esc",":q",":Q",":!":
+		goto RAUSS
+	}
+	/*if x==" "{
+		fmt.Print("Do5: ")
+		if nRandomLang==1 {
+			fmt.Printf(" %v  =  \n",Dictionaries[nRandomDict].Vocables[nRandomVoc].Languages[0])
+		}else {
+			fmt.Printf(" %v  =  \n",Dictionaries[nRandomDict].Vocables[nRandomVoc].Languages[1])
+		}
+		fmt.Scanf("%c",&x)
+	}else{
+		fmt.Println("Do2")
+		goto NEXTE
+	}*/
+	RAUSS:
+}
+const inputdelimiter = '\n'
+func readString(consolesetext string,input *string)  {
+	if consolesetext !="" {
+		fmt.Print(consolesetext)
+	}
+	reader := bufio.NewReader(os.Stdin)
+	var err error
+	*input, err = reader.ReadString(inputdelimiter)
+	if err != nil {
+		fmt.Println("FEHLER:", err)
+		return
+	}
+	// convert CRLF to LF
+	*input = strings.Replace(*input, "\r\n", "", -1)
+}
+
 
 func test3(){
 	fmt.Print("test3 (such string eingeben:)>")
@@ -281,6 +397,52 @@ func editVocable(){
 	fmt.Scan(&x)
 	dict.EditVocable(0,0,1,x)
 	fmt.Printf("aus Old '%v' wurde '%v'\nEndEdit\n",old,dict.Dictionaries[0].Vocables[0].Languages[1])
+}
+
+
+
+
+func menu(){
+	ANFANG:
+	fmt.Print(`Which example do you want to run?
+1) Vokabeltrainer
+2) bufio.Reader.ReadString(...)
+3) bufio.Reader.ReadByte(...)
+4) ENDE()
+Please enter 1..5 and press ENTER: `)
+
+	reader := bufio.NewReader(os.Stdin)
+	result, _, err := reader.ReadRune()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	switch result {
+
+	case '1':
+		training()
+		goto ANFANG
+		break
+
+	case '2':
+		//runReadString()
+		goto ANFANG
+		break
+
+	case '3':
+		editVocable()
+		goto ANFANG
+		break
+
+	case '4':
+		goto ENDE
+		break
+
+	default:
+		return
+	}
+	ENDE:
 }
 func Susi(i int)int{
 	return  i+777
