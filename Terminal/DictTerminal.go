@@ -29,18 +29,9 @@ func main() {
 			}
 		}
 	}
-	/*p:="H:\\Test\\gotest1\\src\\Dictionary\\dict\\dictionaries"
-s,e:=dict.GetFilesFromDirectory(p)
-if e !=nil{
-	fmt.Println("EORRORE 1: " , e)
-}
-for _,f:=range s{
-	fmt.Println(f)
-}*/
 
 	fmt.Println(xx.TrainerTest())
 
-	//return
 	TESTsrc:=""
 	//TESTsrc:="dict" + seppl
 	fmt.Printf("\nPath + TESTsrc = '%v\\%v'\n\n",CurDir,TESTsrc)
@@ -103,114 +94,11 @@ for _,f:=range s{
 	fmt.Println(">>>>>>>>>>>>>TEST 3 ENDE")
 
 
-	test1()
-	/*if test2()=="test1" {
-		test1()
-	}*/
 	RAUSS:
 	fmt.Println("==================== ENDE ====================")
 
 }
-func test2()string{
-	var ret string
-	ret="ölkj"
-	for{
-		fmt.Scan(&ret)
-		switch ret {
-		case "!q","!Q","esc":
-			goto RAUSS
-		case "test1":
-			goto RAUSS
-		}
-	}
-	RAUSS:
-	return ret
-}
 
-func test1(){
-	var x string
-	NEXTE:
-	x=""
-
-	nRandomDict:=dict.GetRandomNumber(0,len(dict.Dictionaries))
-	nRandomVoc:=dict.GetRandomNumber(0,len(dict.Dictionaries[nRandomDict].Vocables))
-	nRandomLang:=dict.GetRandomNumber(0,2)
-	fmt.Printf("%v ",dict.Dictionaries[nRandomDict].Vocables[nRandomVoc].Languages[nRandomLang])
-	NOMOL:
-	x=""
-	fmt.Scan(&x)
-	//fmt.Println("Len x:", len(x), x)
-	if x=="esc"{
-		goto RAUSS
-	}
-	SWITCH:
-	switch x {
-	default:
-		//fmt.Println("------------------")
-		goto NEXTE
-	/*case "ä","ü","ß","ö": // sobald des an Umlaut od. scharfes ß isch, gibts (IN DER EXE!!) a Dauerschleife
-		x=""*/
-
-	//case ".":
-	case "-":
-		if nRandomLang==1 {
-			//nRandomLang=0
-			//fmt.Printf("                       %v",dict.Dictionaries[nRandomDict].Vocables[nRandomVoc].Languages[nRandomLang])
-			fmt.Printf("%v = %v\n",dict.Dictionaries[nRandomDict].Vocables[nRandomVoc].Languages[nRandomLang],dict.Dictionaries[nRandomDict].Vocables[nRandomVoc].Languages[0])
-		}else {
-			//nRandomLang=1
-			//fmt.Printf("                       %v",dict.Dictionaries[nRandomDict].Vocables[nRandomVoc].Languages[nRandomLang])
-			fmt.Printf("%v = %v\n",dict.Dictionaries[nRandomDict].Vocables[nRandomVoc].Languages[nRandomLang],dict.Dictionaries[nRandomDict].Vocables[nRandomVoc].Languages[1])
-		}
-		//goto NOMOL
-		fmt.Printf("------------------\n")
-		goto NEXTE
-	/*case "XX-":
-		fmt.Printf("%v \n__________________\n\n",dict.Dictionaries[nRandomDict].Vocables[nRandomVoc].Languages[0] + " = " + dict.Dictionaries[nRandomDict].Vocables[nRandomVoc].Languages[1])
-		goto NEXTE
-	*/
-	case ",":
-	case ":d":
-		fmt.Printf("RandomDict: %v    RandomVoc: %v     RandomLang: %v\n",dict.Dictionaries[nRandomDict].Name, nRandomVoc, nRandomLang)
-		goto NOMOL
-	case ":e": //EDIT
-		editVocable()
-		goto NOMOL
-	case ":s": //Suche Vocable
-		fmt.Println("=====================SUCHE START")
-		SUCHAGAIN:
-		fmt.Printf("%v",":s >")
-		x=""
-		fmt.Scan(&x)
-		if strings.HasPrefix(x,"!"){
-			fmt.Println("=====================SUCHE ENDE")
-			goto SWITCH
-		}
-		s,anz:=such(x)
-		if anz==0{
-			fmt.Printf("%v\n", "not found")
-		}else {
-			fmt.Printf("%v\n", s)
-		}
-		goto SUCHAGAIN
-	case "esc",":q",":Q":
-		goto RAUSS
-	}
-	/*if x==" "{
-		fmt.Print("Do5: ")
-		if nRandomLang==1 {
-			fmt.Printf(" %v  =  \n",Dictionaries[nRandomDict].Vocables[nRandomVoc].Languages[0])
-		}else {
-			fmt.Printf(" %v  =  \n",Dictionaries[nRandomDict].Vocables[nRandomVoc].Languages[1])
-		}
-		fmt.Scanf("%c",&x)
-	}else{
-		fmt.Println("Do2")
-		goto NEXTE
-	}*/
-	RAUSS:
-
-}
 func training(){
 	var x string
 	NEXTE:
@@ -263,47 +151,22 @@ func training(){
 	case ":e": //EDIT
 		editVocable()
 		goto NOMOL
-	case ":s": //Suche Vocable
+	case ":s":
 		fmt.Println("=====================SUCHE START")
 		SUCHAGAIN:
-
 		x=""
 		readString (":s >",&x)
-		//fmt.Println("Len x:", len(x), x)
-		//fmt.Printf("x=%v   len=%v\n", x,  len(x))
-
-
-
-
-		//fmt.Printf("%v",":s >")
-		//x=""
-		//fmt.Scan(&x)
 		if strings.HasPrefix(x,"!"){
 			fmt.Println("=====================SUCHE ENDE")
 			goto SWITCH
 		}
-		s,anz:=such(x)
-		if anz==0{
-			fmt.Printf("%v\n", "not found")
-		}else {
-			fmt.Printf("%v\n", s)
-		}
+		such(&x)
+
 		goto SUCHAGAIN
 	case "esc",":q",":Q",":!":
 		goto RAUSS
 	}
-	/*if x==" "{
-		fmt.Print("Do5: ")
-		if nRandomLang==1 {
-			fmt.Printf(" %v  =  \n",Dictionaries[nRandomDict].Vocables[nRandomVoc].Languages[0])
-		}else {
-			fmt.Printf(" %v  =  \n",Dictionaries[nRandomDict].Vocables[nRandomVoc].Languages[1])
-		}
-		fmt.Scanf("%c",&x)
-	}else{
-		fmt.Println("Do2")
-		goto NEXTE
-	}*/
+
 	RAUSS:
 }
 const inputdelimiter = '\n'
@@ -322,72 +185,20 @@ func readString(consolesetext string,input *string)  {
 	*input = strings.Replace(*input, "\r\n", "", -1)
 }
 
-
-func test3(){
-	fmt.Print("test3 (such string eingeben:)>")
-	var x string
-	x=""
-	fmt.Scan(&x)
-	D:= dict.SearchStringInDicts(x)
-	fmt.Printf("DICTS 0: %v\n\n\n\n ",D[0])
-	fmt.Printf("DICTS 1: %v\n\n\n\n ",D[1])
-	fmt.Printf(" %v mal in allen Dicts gefunden\n ",len(D))
+func such(searchstring *string){
+	D:= dict.SearchStringInDicts(*searchstring)
 	if len(D)>0{
 		//fmt.Printf("Länge %v\n", D[0])
 		for i:=0;i<len(D);i++{
-			fmt.Printf("  Dictname: %v  AnzahlVocs(%v)\n",D[i].Name,len(D[i].Vocables))
+			fmt.Printf("Dictname: %v  AnzahlVocs(%v)\n",D[i].Name,len(D[i].Vocables))
 			for ii:=0 ;ii<len(D[i].Vocables);ii++{
-				//fmt.Printf("      Anzahl Vocs: %v\n" ,len(D[i].Vocables))
-				fmt.Printf("      Dict[%v].Vocables[%v] %v = %v  \n" ,i,ii,D[i].Vocables[ii].Languages[0],D[i].Vocables[ii].Languages[1])
-			}
-		}
-
-	}
-
-}
-
-func such(s string)(gef string, anz int){
-	//fmt.Println("--------------Search Start")
-	s= strings.ToLower(s)
-	var lvoc string
-	var lvocRet string
-	//for i,r:=range AllDictFiles{
-	var d dict.Dictionary
-	nfund:=0
-	nfundGesamt:=0
-	ii:=0
-	//i:=0
-	for _ ,d = range dict.Dictionaries{
-		//fmt.Printf("DICTIONARY: %v %v:\n",i,d.Name)
-		nfund=0
-		lvoc=""
-		for ii, _ = range d.Vocables {
-			//fmt.Printf("  ii:%v\n",ii)
-			if strings.Contains(strings.ToLower(d.Vocables[ii].Languages[0]),s)||strings.Contains(strings.ToLower(d.Vocables[ii].Languages[1]),s){
-				nfund++
-				nfundGesamt++
-				if lvoc =="" {
-					//fmt.Printf("    Fund: %v\n", d.Vocables[ii])
-					lvoc = "    " + d.Vocables[ii].Languages[0] + " = " + d.Vocables[ii].Languages[1]
-				}else{
-					lvoc = lvoc + "\n" + "    " + d.Vocables[ii].Languages[0] + " = " + d.Vocables[ii].Languages[1]
-				}
-			}
-		}
-		if nfund > 0 {
-			if lvocRet == "" {
-				//lvocRet = fmt.Sprintf("%v (%v Einträge)", strings.ToUpper(d.Name) ,nfund)
-				lvocRet = fmt.Sprintf("%v (%v)\n%v",strings.ToUpper(d.Name), nfund, lvoc)
-			} else {
-				lvoc =  fmt.Sprintf("\n\n%v (%v) \n%v", strings.ToUpper(d.Name), nfund , lvoc)
-				lvocRet = lvocRet + lvoc
+				fmt.Printf("  d[%v].v[%v] %v = %v  \n" ,i,ii,D[i].Vocables[ii].Languages[0],D[i].Vocables[ii].Languages[1])
 			}
 		}
 	}
-	//fmt.Println("--------------Search END")
-//RAUSS:
-	return lvocRet, nfundGesamt
 }
+
+
 func editVocable(){
 	fmt.Println("BeginEdit")
 	var x string
@@ -398,9 +209,6 @@ func editVocable(){
 	dict.EditVocable(0,0,1,x)
 	fmt.Printf("aus Old '%v' wurde '%v'\nEndEdit\n",old,dict.Dictionaries[0].Vocables[0].Languages[1])
 }
-
-
-
 
 func menu(){
 	ANFANG:
@@ -443,7 +251,4 @@ Please enter 1..5 and press ENTER: `)
 		return
 	}
 	ENDE:
-}
-func Susi(i int)int{
-	return  i+777
 }
