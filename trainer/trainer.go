@@ -1,19 +1,21 @@
 package trainer
 
 import (
-	_ "fmt"
 	D "Dictionary/dict"
+	_ "fmt"
 )
 
 type Box struct {
 	Number int
 	Name int
-
-	Vocables []D.Vocable
+	Expressions []Expression
 }
 
-func TrainerTest()string{
-	return  "Hello trainerTest"
+type Expression struct{
+	Dict *D.Dictionary
+	Term D.Vocable
+	falses int
+	Rights int
 }
 
 func main()  {

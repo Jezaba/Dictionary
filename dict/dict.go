@@ -21,6 +21,7 @@ type Dictionary struct {
 	Vocables          []Vocable
 }
 type Vocable struct {
+	//TODO umbenennen in TERMS !!!
 	Languages  []string// alles aufgeteilt in die einzelnen Sprachen
 }
 
