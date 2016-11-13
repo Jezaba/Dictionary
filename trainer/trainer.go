@@ -6,10 +6,15 @@ import (
 )
 
 type Box struct {
-	Number int
-	Name int
-	Expressions []Expression
+	Name string
+	Sections []Section
 }
+
+type Section struct{
+	Number int  // zB 0-9 Sektoren
+        Expressions []Expression
+}
+
 
 type Expression struct{
 	Dict *D.Dictionary
